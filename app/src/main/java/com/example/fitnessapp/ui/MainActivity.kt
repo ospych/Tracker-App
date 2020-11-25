@@ -17,8 +17,6 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
 
         navigateToTrackingFragmentIfNeeded(intent)
-
-//        setSupportActionBar(toolbar)
     }
 
     override fun onNewIntent(intent: Intent?) {

@@ -3,7 +3,6 @@ package com.example.fitnessapp.ui.fragments
 import android.content.Intent
 import android.os.Bundle
 import android.view.*
-import androidx.lifecycle.Observer
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
@@ -30,7 +29,6 @@ import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.android.synthetic.main.fragment_tracking.*
 import timber.log.Timber
 import java.util.*
-import javax.inject.Inject
 import kotlin.math.round
 
 @AndroidEntryPoint
@@ -45,9 +43,6 @@ class TrackingFragment : Fragment(R.layout.fragment_tracking) {
     private var curTimeInMillis = 0L
 
     private var menu: Menu? = null
-
-    @set:Inject
-    var weight = 80f
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?):
             View? {
@@ -196,9 +191,8 @@ class TrackingFragment : Fragment(R.layout.fragment_tracking) {
             }
             val avgSpeed = round((distanceInMeters / 1000f) / (curTimeInMillis / 1000f / 60 / 60) * 10) / 10f
             val dateTimestamp = Calendar.getInstance().timeInMillis
-            val caloriesBurned = ((distanceInMeters / 1000f) * weight).toInt()
 
-            val run = Run(bmp, dateTimestamp, avgSpeed, distanceInMeters, curTimeInMillis, caloriesBurned)
+            val run = Run(bmp, dateTimestamp, avgSpeed, distanceInMeters, curTimeInMillis)
             Timber.d("\nDistance: ${distanceInMeters}\nAvgSpeed: ${avgSpeed}\nCurTime: ${curTimeInMillis}")
             viewModel.insertRun(run)
 

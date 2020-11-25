@@ -5,8 +5,6 @@ import android.content.SharedPreferences
 import androidx.room.Room
 import com.example.fitnessapp.database.RunningDatabase
 import com.example.fitnessapp.other.Constants.KEY_FIRST_TIME_TOGGLE
-import com.example.fitnessapp.other.Constants.KEY_NAME
-import com.example.fitnessapp.other.Constants.KEY_WEIGHT
 import com.example.fitnessapp.other.Constants.RUNNING_DATABASE_NAME
 import com.example.fitnessapp.other.Constants.SHARED_PREFERENCES_NAME
 import dagger.Module
@@ -34,14 +32,6 @@ object AppModule {
     @Provides
     fun provideSharedPreferences(@ApplicationContext app: Context) =
         app.getSharedPreferences(SHARED_PREFERENCES_NAME, Context.MODE_PRIVATE)
-
-    @Singleton
-    @Provides
-    fun provideName(sharedPref: SharedPreferences) = sharedPref.getString(KEY_NAME, "") ?: ""
-
-    @Singleton
-    @Provides
-    fun provideWeight(sharedPref: SharedPreferences) = sharedPref.getFloat(KEY_WEIGHT, 80f)
 
     @Singleton
     @Provides

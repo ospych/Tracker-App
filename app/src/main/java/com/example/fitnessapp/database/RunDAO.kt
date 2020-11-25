@@ -1,6 +1,7 @@
 package com.example.fitnessapp.database
 
 import androidx.lifecycle.LiveData
+import androidx.lifecycle.MediatorLiveData
 import androidx.room.*
 
 @Dao
@@ -17,9 +18,6 @@ interface RunDAO {
     @Query("SELECT * FROM fitness_table ORDER BY timeInMillis DESC")
     fun getAllRunsSortedByTimeInMillis(): LiveData<List<Run>>
 
-    @Query("SELECT * FROM fitness_table ORDER BY caloriesBurned DESC")
-    fun getAllRunsSortedByCaloriesBurned(): LiveData<List<Run>>
-
     @Query("SELECT * FROM fitness_table ORDER BY averageSpeedInKMH DESC")
     fun getAllRunsSortedByAvgSpeed(): LiveData<List<Run>>
 
@@ -28,9 +26,6 @@ interface RunDAO {
 
     @Query("SELECT SUM(timeInMillis) FROM fitness_table")
     fun getTotalTimeInMillis(): LiveData<Long>
-
-    @Query("SELECT SUM(caloriesBurned) FROM fitness_table")
-    fun getTotalCaloriesBurned(): LiveData<Int>
 
     @Query("SELECT SUM(distanceInMeters) FROM fitness_table")
     fun getTotalDistance(): LiveData<Int>

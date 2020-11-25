@@ -3,10 +3,8 @@ package com.example.fitnessapp.digger
 import android.app.PendingIntent
 import android.content.Context
 import android.content.Intent
-import androidx.core.app.NotificationCompat
-import com.example.fitnessapp.ui.MainActivity
-import com.example.fitnessapp.R
 import com.example.fitnessapp.other.Constants
+import com.example.fitnessapp.ui.MainActivity
 import com.google.android.gms.location.FusedLocationProviderClient
 import dagger.Module
 import dagger.Provides
@@ -35,19 +33,6 @@ object ServiceModule {
         Intent(app, MainActivity::class.java).also {
             it.action = Constants.ACTION_SHOW_TRACKING_FRAGMENT
         },
-        PendingIntent.FLAG_UPDATE_CURRENT // for updating notification, not recreate
+        PendingIntent.FLAG_UPDATE_CURRENT
     )
-
-    @ServiceScoped
-    @Provides
-    fun provideBaseNotificationBuilder(
-        @ApplicationContext app: Context,
-        pendingIntent: PendingIntent
-    ) = NotificationCompat.Builder(app, Constants.NOTIFICATION_CHANNEL_ID)
-        .setAutoCancel(false) //Notification dont disappear
-        .setOngoing(true)
-        .setSmallIcon(R.drawable.ic_directions_run_black_24dp)
-        .setContentTitle(app.getString(R.string.notif))
-        .setContentText("00:00:00")
-        .setContentIntent(pendingIntent)
 }
